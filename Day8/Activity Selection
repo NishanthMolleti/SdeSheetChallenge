@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+struct arr{
+    int s;
+    int f;
+    int p;
+};
+bool comp(struct arr a, arr b){
+    if(a.f<b.f)return true;
+    else if(a.f>b.f)return false;
+    else if(a.p<b.p)return true;
+    return false;
+}
+int maximumActivities(vector<int> &start, vector<int> &finish) {
+    // Write your code here.
+    struct arr a[(int)start.size()];
+    for(int i=0;i<start.size();i++){
+        a[i].s=start[i],a[i].f=finish[i],a[i].p=i+1;
+    }
+    sort(a,a+(int)start.size(),comp);
+    int l=a[0].f;
+    vector<int> v;
+    v.push_back(a[0].p);
+    int t=1;
+    for(int i=1;i<start.size();i++){
+        if(a[i].s>=l){
+            l=a[i].f;
+            v.push_back(a[i].p);
+        }
+    }
+    return v.size();
+}
