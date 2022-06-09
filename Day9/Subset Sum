@@ -1,0 +1,16 @@
+void solve(int ind,vector<int>& num,int n,vector<int>& res,int sum){
+    if(ind==n){
+        res.push_back(sum);
+        return ;
+    }
+    solve(ind+1,num,n,res,sum+num[ind]);
+        solve(ind+1,num,n,res,sum);
+}
+vector<int> subsetSum(vector<int> &num)
+{
+    vector<int> res;
+    int n=num.size();
+    solve(0,num,n,res,0);
+    sort(res.begin(),res.end());
+    return res;
+}
