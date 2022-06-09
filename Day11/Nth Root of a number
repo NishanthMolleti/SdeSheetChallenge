@@ -1,0 +1,19 @@
+double mu(double mi,int n){
+    double ans=1.00;
+    for(int i=1;i<=n;i++){
+        ans*=mi;
+    }
+    return ans;
+}
+double findNthRootOfM(int n, long long m) {
+	double l=1,h=m, e=1e-7;
+    while((h-l)>e){
+        double mi=(l+h)/2.0;
+        if(mu(mi,n)<(double)m){
+            l=mi;
+        }else{
+            h=mi;
+        }
+    }
+    return l;
+}
