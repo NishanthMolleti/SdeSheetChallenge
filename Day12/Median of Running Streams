@@ -1,0 +1,131 @@
+#include<bits/stdc++.h>
+
+void findMedian(int *arr, int n) {
+
+   priority_queue<int>p_max;
+
+   priority_queue<int,vector<int>,greater<int>>p_min;
+
+   
+
+   p_max.push(arr[0]);
+
+   int curMed = arr[0], cur;
+
+   
+
+   for(int i=1;i<n;i++){
+
+       cur = arr[i];
+
+       
+
+       if(cur < curMed)
+
+           p_max.push(cur);
+
+       else
+
+           p_min.push(cur);
+
+       
+
+       int smax = p_max.size();
+
+       int smin = p_min.size();
+
+       
+
+       if(i&1 && smax!=smin){
+
+           if(smax > smin){
+
+               while(p_max.size() != p_min.size()){
+
+                   p_min.push(p_max.top());
+
+                   p_max.pop();
+
+               }
+
+           }else{
+
+               while(p_max.size() != p_min.size()){
+
+                   p_max.push(p_min.top());
+
+                   p_min.pop();
+
+               }
+
+           }
+
+       }
+
+       
+
+       if(!(i&1) && abs(smax-smin) > 1){
+
+           if(smax > smin){
+
+               while(p_max.size()-p_min.size() >1){
+
+                   p_min.push(p_max.top());
+
+                   p_max.pop();
+
+               }
+
+           }else{
+
+               while(p_min.size()-p_max.size() > 1){
+
+                   p_max.push(p_min.top());
+
+                   p_min.pop();
+
+               }
+
+           }
+
+       }
+
+       
+
+       if(i&1){
+
+           curMed = (p_max.top()+p_min.top())/2;
+
+           arr[i] = curMed;
+
+       }else{
+
+           if(p_max.size()>p_min.size()){
+
+               curMed = p_max.top();
+
+               arr[i] = curMed;
+
+           }else{
+
+               curMed = p_min.top();
+
+               arr[i] = curMed;
+
+           }
+
+       }
+
+   }
+
+   
+
+   for(int i=0;i<n;i++){
+
+       cout<<arr[i]<<" ";
+
+   }
+
+   return;
+
+}
