@@ -1,0 +1,16 @@
+int search(int* arr, int n, int key) {
+    int l=0,h=n-1;
+    while(l<=h){
+        int m=(l+h)/2;
+        if(arr[m]==key)return m;
+        else if(arr[l]<=arr[m]){
+            if(key<=arr[m]&&key>=arr[l])h=m-1;
+            else l=m+1;
+        }
+        else {
+            if(key>=arr[m]&&key<=arr[h])l=m+1;
+            else h=m-1;
+        }
+    }
+    return -1;
+}
