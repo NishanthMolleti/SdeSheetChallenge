@@ -1,0 +1,19 @@
+void insert(int temp,stack<int> &st){
+    if(st.size() == 0){
+        st.push(temp);
+        return;
+    }
+    if(st.top() > temp){
+        int t = st.top(); st.pop();
+        insert(temp,st);
+        st.push(t);
+    }else{
+        st.push(temp);
+    }
+}
+void sortStack(stack<int> &st){
+    if(st.size() == 1) return;
+    int temp = st.top(); st.pop();
+    sortStack(st);
+    insert(temp,st);
+}
