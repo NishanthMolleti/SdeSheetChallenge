@@ -1,0 +1,22 @@
+string reverseString(string str)
+{
+    string s="",t="";
+    for(int i=0;i<str.size();i++){
+        if(str[i]!=' '){
+            s+=str[i];
+        }else if(str[i]==' '&&s!="") {
+            if(t!=""){
+                t=s+" "+t;
+                s="";
+            }else if(t==""){
+                t=s;
+                s="";
+            }
+        }
+    }
+    if(s!=""){
+        if(t!="")t=s+" "+t;
+        else t=s;
+            }
+    return t;
+}
