@@ -1,0 +1,16 @@
+void helper(vector<int>& v,TreeNode *root){
+    if(root==NULL)return ;
+    helper(v,root->left);
+    helper(v,root->right);
+        v.push_back(root->data);
+
+}
+vector<int> getPostOrderTraversal(TreeNode *root)
+{
+    // Write your code here.
+    
+    vector<int> v;
+    if(root==NULL)return v;
+    helper(v,root);
+    return v;
+}
