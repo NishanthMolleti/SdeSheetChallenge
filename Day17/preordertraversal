@@ -1,0 +1,39 @@
+/*
+    Following is Binary Tree Node structure:
+    class TreeNode
+    {
+    public:
+        int data;
+        TreeNode *left, *right;
+        TreeNode() : data(0), left(NULL), right(NULL) {}
+        TreeNode(int x) : data(x), left(NULL), right(NULL) {}
+        TreeNode(int x, TreeNode *left, TreeNode *right) : data(x), left(left), right(right) {}
+    };
+*/
+/*
+    Following is Binary Tree Node structure:
+    class TreeNode
+    {
+    public:
+        int data;
+        TreeNode *left, *right;
+        TreeNode() : data(0), left(NULL), right(NULL) {}
+        TreeNode(int x) : data(x), left(NULL), right(NULL) {}
+        TreeNode(int x, TreeNode *left, TreeNode *right) : data(x), left(left), right(right) {}
+    };
+*/
+void helper(vector<int>& v,TreeNode *root){
+    if(root==NULL)return ;
+    v.push_back(root->data);
+
+    helper(v,root->left);
+    helper(v,root->right);
+}
+
+vector<int> getPreOrderTraversal(TreeNode *root)
+{
+    vector<int> v;
+    if(root==NULL)return v;
+    helper(v,root);
+    return v;
+}
