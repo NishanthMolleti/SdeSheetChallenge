@@ -1,0 +1,26 @@
+#include<bits/stdc++.h>
+class Kthlargest {
+public:
+    priority_queue<int,vector<int> ,greater<int> > mini;
+    int k=0;
+    Kthlargest(int k, vector<int> &arr) {
+       // Write your code here.
+        for(auto it:arr){
+            mini.push(it);
+            if(mini.size()>k)mini.pop();
+        }
+        this->k=k;
+    }
+
+    void add(int num) {
+        // Write your code here.
+        mini.push(num);
+        if(mini.size()>k)mini.pop();
+    }
+
+    int getKthLargest() {
+       // Write your code here.
+        return mini.top();
+    }
+
+};
