@@ -1,0 +1,47 @@
+/************************************************************
+    Following is the Binary Search Tree node structure
+    
+    template <typename T>
+    class TreeNode {
+        public :
+        T data;
+        TreeNode<T> *left;
+        TreeNode<T> *right;
+
+        TreeNode(T data) {
+            this -> data = data;
+            left = NULL;
+            right = NULL;
+        }
+
+        ~TreeNode() {
+            if(left)
+                delete left;
+            if(right)
+                delete right;
+        }
+    };
+
+************************************************************/
+
+TreeNode<int>* LCAinaBST(TreeNode<int>* root, TreeNode<int>* a, TreeNode<int>* b)
+{
+	// Write your code here
+    if (root == NULL)
+    {
+        return NULL;
+    }
+    else if(a->data==root->data || b->data==root->data){
+        return root;
+    }
+    else if(root->data< a->data && root->data<b->data){
+        TreeNode<int>* rightans=LCAinaBST(root->right,a,b);
+        return rightans;
+    }
+    else if(root->data> a->data && root->data >b->data){
+        TreeNode<int>* leftans=LCAinaBST(root->left,a,b);
+        return leftans;
+    }
+    else 
+        return root;
+}
