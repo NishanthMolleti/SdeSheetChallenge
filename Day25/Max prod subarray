@@ -1,0 +1,12 @@
+int maximumProduct(vector<int> &nums, int n)
+{
+	int maxeh=nums[0],mineh=nums[0],msf=nums[0];
+        for(int i=1;i<nums.size();i++)
+        {
+            int temp=maxeh;
+            maxeh=max(nums[i],max(nums[i]*maxeh,nums[i]*mineh));
+            mineh=min(nums[i],min(nums[i]*temp,nums[i]*mineh));
+            msf=max(msf,maxeh);
+        }
+        return msf;
+}
