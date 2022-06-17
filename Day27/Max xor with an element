@@ -1,60 +1,23 @@
-#include <bits/stdc++.h>
-
-struct TrieNode{
-    TrieNode* child[2];
-};
-
-TrieNode* getNode()
-{
-    TrieNode* node = new TrieNode();
-    node->child[0] = node->child[1] = NULL;
-    return node;
-}
-
-void insert(TrieNode* root, int num)
-{
-    TrieNode* curr = root;
-    for(int i=31; i>=0; i--)
-    {
-        int bit = (num>>i)&1;
-        if(curr->child[bit] == NULL)
-        {
-            curr->child[bit] = getNode();
-        }
-        curr = curr->child[bit];
-    }
-}
-
-int findMax(TrieNode* root, int num)
-{
-    TrieNode* curr = root;
-    int mxAns = 0;
-    for(int i=31; i>=0; i--)
-    {
-        int bit = (num>>i)&1;
-        if(curr->child[1-bit] != NULL)
-        {
-            curr = curr->child[1-bit];
-            mxAns = mxAns | ((1<<i));
-        }
-        else
-        {
-            curr = curr->child[bit];
-        }
-    }
-    return mxAns;
-}
-
-int maximumXor(vector<int> arr)
-{
-    // Write your code here. 
-    TrieNode* root = getNode();
-    for(auto &it:arr)
-        insert(root, it);
+#include<bits/stdc++.h>
+vector<int> maxXorQueries(vector<int> &arr, vector<vector<int>> &queries){
+	
+    sort(arr.begin(),arr.end());
+    vector<int> v;
     
-    int ans = 0;
-    for(auto &it:arr)
-        ans = max(ans, findMax(root, it));
-    
-    return ans;
+    for(int i =0;i<queries.size();i++){
+        int xo = queries[i][0];
+        int limit = queries[i][1];
+        int maxi =-1;
+        for(int j =0;j<arr.size();j++){
+            if(arr[j]>limit){
+                break;
+            }else{
+                int res = xo^arr[j];
+                maxi=max(maxi,res);
+            }
+            
+        }
+        v.push_back(maxi);
+    }
+    return v;
 }
